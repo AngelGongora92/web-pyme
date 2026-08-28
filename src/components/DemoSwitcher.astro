@@ -1,0 +1,100 @@
+---
+import { getSiteData } from '../data/getSiteData';
+const siteData = await getSiteData();
+const currentPath = Astro.url.pathname;
+---
+<div id="demo-switcher" class="fixed bottom-0 left-1/2 -translate-x-1/2 z-[100] flex flex-col items-center translate-y-full transition-transform duration-300 ease-in-out">
+  
+  <!-- The Tab -->
+  <button id="demo-toggle" class="absolute -top-10 bg-gray-900 text-white px-6 py-2.5 rounded-t-xl font-bold text-xs uppercase tracking-widest flex items-center gap-2 shadow-lg hover:bg-gray-800 transition-colors">
+    <span class="relative flex h-2 w-2">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-primary"></span>
+    </span>
+    Demo Live
+    <svg id="demo-chevron" class="w-4 h-4 transition-transform duration-300 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+  </button>
+
+  <!-- The Panel -->
+  <div class="bg-white/95 backdrop-blur-md p-6 rounded-t-2xl shadow-[0_-10px_40px_rgba(0,0,0,0.1)] border-t border-x border-gray-200 w-[95vw] md:w-[600px] flex flex-col md:flex-row gap-6 justify-center">
+    
+    <div class="flex flex-col gap-2 w-full md:w-1/2">
+      <span class="text-[10px] font-bold text-gray-400 tracking-wider text-center md:text-left">1. PLANTILLA</span>
+      <div class="flex bg-gray-100 p-1.5 rounded-lg gap-1 w-full">
+        <a href="/" class={`flex-1 text-center px-2 py-2 text-xs font-bold rounded-md transition-colors ${currentPath === '/' ? 'bg-white shadow-sm text-brand-primary' : 'text-gray-500 hover:text-gray-700'}`}>Estándar</a>
+        <a href="/visual" class={`flex-1 text-center px-2 py-2 text-xs font-bold rounded-md transition-colors ${currentPath === '/visual' || currentPath === '/visual/' ? 'bg-white shadow-sm text-brand-primary' : 'text-gray-500 hover:text-gray-700'}`}>Boutique</a>
+        <a href="/landing" class={`flex-1 text-center px-2 py-2 text-xs font-bold rounded-md transition-colors ${currentPath === '/landing' || currentPath === '/landing/' ? 'bg-white shadow-sm text-brand-primary' : 'text-gray-500 hover:text-gray-700'}`}>Landing</a>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2 w-full md:w-1/2">
+      <span class="text-[10px] font-bold text-gray-400 tracking-wider text-center md:text-left">2. ESTILO</span>
+      <div class="flex bg-gray-100 p-1.5 rounded-lg gap-1 w-full">
+        <button data-theme-btn="modern" class="theme-btn flex-1 text-center px-2 py-2 text-xs font-bold rounded-md transition-colors bg-white shadow-sm text-brand-primary">Moderno</button>
+        <button data-theme-btn="bold" class="theme-btn flex-1 text-center px-2 py-2 text-xs font-bold rounded-md transition-colors text-gray-500 hover:text-gray-700">Audaz</button>
+        <button data-theme-btn="warm" class="theme-btn flex-1 text-center px-2 py-2 text-xs font-bold rounded-md transition-colors text-gray-500 hover:text-gray-700">Cálido</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Drawer logic
+  const switcher = document.getElementById('demo-switcher');
+  const toggleBtn = document.getElementById('demo-toggle');
+  const chevron = document.getElementById('demo-chevron');
+  let isOpen = false;
+
+  toggleBtn.addEventListener('click', () => {
+    isOpen = !isOpen;
+    if (isOpen) {
+      switcher.classList.remove('translate-y-full');
+      switcher.classList.add('translate-y-0');
+      chevron.classList.remove('rotate-180');
+      chevron.classList.add('rotate-0');
+    } else {
+      switcher.classList.remove('translate-y-0');
+      switcher.classList.add('translate-y-full');
+      chevron.classList.remove('rotate-0');
+      chevron.classList.add('rotate-180');
+    }
+  });
+
+  // Theme logic
+  const btns = document.querySelectorAll('.theme-btn');
+  
+  const setActiveTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    
+    // Update active button state
+    btns.forEach(b => {
+      if(b.getAttribute('data-theme-btn') === theme) {
+        b.classList.add('bg-white', 'shadow-sm', 'text-brand-primary');
+        b.classList.remove('text-gray-500', 'hover:text-gray-700');
+      } else {
+        b.classList.remove('bg-white', 'shadow-sm', 'text-brand-primary');
+        b.classList.add('text-gray-500', 'hover:text-gray-700');
+      }
+    });
+  };
+
+  const storedTheme = localStorage.getItem('theme');
+  
+  if (storedTheme) {
+    setActiveTheme(storedTheme);
+  } else {
+    const currentAttr = document.documentElement.getAttribute('data-theme');
+    if (currentAttr) {
+      setActiveTheme(currentAttr);
+    }
+  }
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const theme = btn.getAttribute('data-theme-btn');
+      setActiveTheme(theme);
+    });
+  });
+</script>

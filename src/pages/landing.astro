@@ -1,0 +1,92 @@
+---
+import { getSiteData } from '../data/getSiteData';
+const siteData = await getSiteData();
+import Layout from '../layouts/Layout.astro';
+
+---
+
+<Layout title={`Oferta Especial - ${siteData.name}`}>
+  <!-- Conversion Hero -->
+  <section class="pt-6 pb-12 md:pt-10 md:pb-20 bg-brand-neutral relative overflow-hidden">
+    <!-- Decorative background elements -->
+    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand-primary opacity-10 blur-3xl"></div>
+    
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col lg:flex-row items-center gap-12">
+        <div class="w-full lg:w-3/5 text-center lg:text-left">
+          <h1 class="text-4xl md:text-6xl font-black text-gray-900 mb-6 leading-tight tracking-tight mt-6 lg:mt-0">
+            {siteData.headline}
+          </h1>
+          <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0">
+            {siteData.subheadline}
+          </p>
+          
+          <ul class="text-left space-y-4 mb-10 inline-block">
+            {(siteData.whyUs || []).map((item) => (
+              <li class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-brand-cta shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <span class="text-lg text-gray-800 font-medium">{item.title}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <!-- Offer Card / Form Placeholder -->
+        <div class="w-full lg:w-2/5 max-w-md mt-10 lg:mt-0">
+          <div class="bg-white rounded-2xl shadow-2xl p-8 border-4 border-brand-primary relative mt-8">
+            <div class="absolute -top-14 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+              <div class="bg-red-100 text-red-700 font-bold px-4 py-1 rounded-full text-[10px] md:text-xs animate-pulse whitespace-nowrap shadow-sm border border-red-200">
+                🔥 {siteData.promoBadge}
+              </div>
+              <div class="bg-brand-primary text-white font-black px-6 py-2 rounded-full shadow-lg whitespace-nowrap">
+                ¡RESERVA HOY!
+              </div>
+            </div>
+            <h3 class="text-2xl font-bold text-center text-gray-900 mt-8 mb-2">Solicita tu Cotización</h3>
+            <p class="text-center text-gray-500 mb-6 text-sm">Respuesta rápida en menos de 15 minutos</p>
+            
+            <a href={`https://wa.me/${siteData.contact.whatsapp}?text=${encodeURIComponent((siteData.hero || {}).whatsappDefaultMessage)}`} target="_blank" class="w-full block text-center bg-brand-cta text-white py-4 rounded-xl font-black text-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all mb-4">
+              📲 ENVIAR WHATSAPP
+            </a>
+            <p class="text-xs text-center text-gray-400">Tus datos están seguros. Sin compromiso.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <section class="py-6 bg-gray-900 border-b-4 border-brand-primary">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-wrap justify-center gap-8 md:gap-16 items-center opacity-80">
+        {(siteData.trustBadges || []).map((badge) => (
+          <div class="text-white font-bold tracking-wider uppercase text-sm md:text-base flex items-center gap-2">
+            <svg class="w-5 h-5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            {badge}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- High Contrast Services -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-16">{siteData.sectionTitles?.services || '¿Qué incluye nuestro servicio?'}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {siteData.services.slice(0, 4).map((service, index) => (
+          <div class="bg-white p-8 rounded-2xl shadow-lg text-left border-2 border-transparent hover:border-brand-primary transition-colors flex gap-6">
+            <div class="w-16 h-16 rounded-full bg-brand-neutral flex items-center justify-center shrink-0 font-black text-2xl text-brand-primary">
+              {index + 1}
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-gray-900 mb-3">{service.title}</h3>
+              <p class="text-gray-600 mb-4">{service.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>

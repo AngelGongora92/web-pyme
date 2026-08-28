@@ -1,0 +1,31 @@
+---
+import { getSiteData } from '../data/getSiteData';
+const siteData = await getSiteData();
+import { Image } from 'astro:assets';
+---
+
+<section id="servicios" class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{siteData.sectionTitles?.services || 'Nuestros Servicios'}</h2>
+      <div class="w-24 h-1.5 bg-brand-primary mx-auto rounded-full"></div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {siteData.services.map(service => (
+        <div class="bg-brand-neutral rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group flex flex-col h-full">
+          <div class="relative h-56 overflow-hidden">
+            <Image src={service.image} alt={service.title} width={600} height={400} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <h3 class="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+            <p class="text-gray-600 mb-6 flex-grow">{service.description}</p>
+            <a href={`https://wa.me/${siteData.contact.whatsapp}?text=${encodeURIComponent((service.whatsappMessage || '') || `Hola, me interesa el servicio de ${service.title}`)}`} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-white text-brand-primary border-2 border-brand-primary font-semibold px-6 py-3 rounded-xl hover:bg-brand-primary hover:text-white transition-colors w-full">
+              Cotizar Servicio
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

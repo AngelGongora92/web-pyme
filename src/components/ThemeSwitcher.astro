@@ -1,0 +1,49 @@
+---
+import { getSiteData } from '../data/getSiteData';
+const siteData = await getSiteData();
+---
+<div class="fixed bottom-6 left-6 z-50 bg-white shadow-xl rounded-full px-2 py-2 flex items-center gap-1 border border-gray-100">
+  <button data-theme-btn="modern" class="theme-btn px-4 py-2 rounded-full text-sm font-semibold transition-colors bg-gray-900 text-white" aria-label="Tema Moderno">Modern</button>
+  <button data-theme-btn="bold" class="theme-btn px-4 py-2 rounded-full text-sm font-semibold transition-colors text-gray-500 hover:text-gray-900" aria-label="Tema Bold">Bold</button>
+  <button data-theme-btn="warm" class="theme-btn px-4 py-2 rounded-full text-sm font-semibold transition-colors text-gray-500 hover:text-gray-900" aria-label="Tema Warm">Warm</button>
+</div>
+
+<script>
+  const btns = document.querySelectorAll('.theme-btn');
+  
+  const updateActiveBtn = (themeName) => {
+    btns.forEach(btn => {
+      if (btn.getAttribute('data-theme-btn') === themeName) {
+        btn.classList.add('bg-gray-900', 'text-white');
+        btn.classList.remove('text-gray-500', 'hover:text-gray-900');
+      } else {
+        btn.classList.remove('bg-gray-900', 'text-white');
+        btn.classList.add('text-gray-500', 'hover:text-gray-900');
+      }
+    });
+  };
+
+  // Sync initial state
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'modern';
+  updateActiveBtn(currentTheme);
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const theme = btn.getAttribute('data-theme-btn');
+      
+      // Update HTML attribute
+      document.documentElement.setAttribute('data-theme', theme);
+      
+      // Update local storage
+      localStorage.setItem('site-theme', theme);
+      
+      // Update URL without reload
+      const url = new URL(window.location);
+      url.searchParams.set('theme', theme);
+      window.history.pushState({}, '', url);
+      
+      // Update UI
+      updateActiveBtn(theme);
+    });
+  });
+</script>

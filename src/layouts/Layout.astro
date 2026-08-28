@@ -1,0 +1,108 @@
+---
+import { getSiteData } from '../data/getSiteData';
+const siteData = await getSiteData();
+import '../styles/themes.css';
+
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloating from '../components/WhatsAppFloating.astro';
+import DemoSwitcher from '../components/DemoSwitcher.astro';
+
+interface Props {
+  title?: string;
+}
+
+const { title = siteData.name } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": siteData.name,
+  "image": new URL(siteData.images.logo, Astro.site || Astro.url.origin).toString(),
+  "telephone": siteData.contact.phone,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": siteData.contact.address,
+    "addressLocality": "Mérida",
+    "addressRegion": "Yucatán",
+    "addressCountry": "MX"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": siteData.contact.lat,
+    "longitude": siteData.contact.lng
+  }
+};
+
+const defaultTheme = siteData.themePreset || 'modern';
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={siteData.description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- OpenGraph for WhatsApp -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={siteData.description} />
+    <meta property="og:image" content={new URL(siteData.images.hero, Astro.site || Astro.url.origin).toString()} />
+    <meta property="og:type" content="website" />
+    
+    <title>{title}</title>
+
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+    <!-- Inline script to prevent FOUC -->
+    <script define:vars={{ defaultTheme }}>
+      (function() {
+        try {
+          const urlParams = new URLSearchParams(window.location.search);
+          const urlTheme = urlParams.get('theme');
+          const localTheme = localStorage.getItem('site-theme');
+          const theme = urlTheme || localTheme || defaultTheme;
+          
+          if (['modern', 'bold', 'warm'].includes(theme)) {
+            document.documentElement.setAttribute('data-theme', theme);
+            // Save to localStorage if it came from URL
+            if (urlTheme) {
+              localStorage.setItem('site-theme', urlTheme);
+            }
+          } else {
+            document.documentElement.setAttribute('data-theme', defaultTheme);
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <style define:vars={{
+      'brand-primary': siteData.theme.primary,
+      'brand-secondary': siteData.theme.secondary,
+      'brand-cta': siteData.theme.cta,
+      'brand-neutral': siteData.theme.neutral,
+    }}>
+      :root {
+        --brand-primary: var(--brand-primary);
+        --brand-secondary: var(--brand-secondary);
+        --brand-cta: var(--brand-cta);
+        --brand-neutral: var(--brand-neutral);
+      }
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        background-color: var(--brand-neutral);
+      }
+    </style>
+  </head>
+  <body class="antialiased text-gray-800 min-h-screen flex flex-col">
+    <Navbar />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFloating />
+    {siteData.demoMode && <DemoSwitcher />}
+  </body>
+</html>

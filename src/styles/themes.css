@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* TEMA POR DEFECTO: MODERN */
+:root, [data-theme="modern"] {
+  --font-base: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Inter', system-ui, sans-serif;
+  
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  --btn-border: 2px solid transparent;
+  --btn-transform: none;
+}
+
+/* TEMA BOLD (Industrial / Alto Impacto) */
+[data-theme="bold"] {
+  --font-base: system-ui, -apple-system, sans-serif;
+  --font-heading: 'Arial Black', Impact, sans-serif;
+  
+  --radius-md: 0.25rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.25rem;
+  --radius-2xl: 0.375rem;
+  --radius-3xl: 0.375rem;
+  --radius-full: 0.375rem; /* Hace cuadrados incluso los botones redondos, excepto si forzamos estilo */
+
+  --shadow-sm: 2px 2px 0px 0px rgba(0,0,0,0.8);
+  --shadow-md: 3px 3px 0px 0px rgba(0,0,0,0.8);
+  --shadow-lg: 5px 5px 0px 0px rgba(0,0,0,0.9);
+  --shadow-xl: 8px 8px 0px 0px rgba(0,0,0,0.9);
+  --shadow-2xl: 12px 12px 0px 0px rgba(0,0,0,1);
+
+  --btn-border: 2px solid #111;
+  --btn-transform: uppercase;
+}
+
+/* TEMA WARM (Elegante / Lifestyle) */
+[data-theme="warm"] {
+  --font-base: 'Georgia', serif;
+  --font-heading: 'Playfair Display', 'Georgia', serif;
+  
+  --radius-md: 1rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 3rem;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 4px 14px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 8px 20px 0 rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 12px 30px 0 rgb(0 0 0 / 0.07);
+  --shadow-xl: 0 20px 40px 0 rgb(0 0 0 / 0.08);
+  --shadow-2xl: 0 30px 60px 0 rgb(0 0 0 / 0.1);
+
+  --btn-border: 1px solid rgba(0,0,0,0.1);
+  --btn-transform: none;
+}
+
+/* Sobrescribir botones globales y textos basados en variables de tema */
+body {
+  font-family: var(--font-base);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading) !important;
+  letter-spacing: -0.025em;
+}
+
+/* Si el tema es bold, apretamos más las letras de títulos */
+[data-theme="bold"] h1, [data-theme="bold"] h2 {
+  letter-spacing: -0.05em;
+}
+
+/* Aplicar transformaciones a los botones (enlaces que parezcan botones) */
+a[class*="bg-brand-cta"], a[class*="bg-brand-primary"] {
+  border: var(--btn-border);
+  text-transform: var(--btn-transform);
+}
+
+/* Asegurar que las imágenes mantengan su redondez dictada por el tema */
+img {
+  border-radius: inherit;
+}

@@ -1,0 +1,61 @@
+---
+import { getSiteData } from '../data/getSiteData';
+const siteData = await getSiteData();
+---
+
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-4 max-w-3xl">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{siteData.sectionTitles?.faq || 'Preguntas Frecuentes'}</h2>
+      <div class="w-24 h-1.5 bg-brand-primary mx-auto rounded-full"></div>
+    </div>
+    
+    <div class="space-y-4">
+      {siteData.faqs.map((faq, index) => (
+        <div class="faq-item bg-gray-50 rounded-xl border border-gray-100 overflow-hidden">
+          <button class="faq-button w-full flex items-center justify-between cursor-pointer p-6 font-bold text-gray-900 text-left">
+            <span>{faq.question}</span>
+            <span class="faq-icon transition-transform duration-300 text-brand-primary transform">
+              <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </button>
+          <div class="faq-answer grid transition-all duration-300 ease-in-out grid-rows-[0fr]">
+            <div class="overflow-hidden">
+              <div class="px-6 pb-6 text-gray-600">
+                {faq.answer}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const buttons = document.querySelectorAll('.faq-button');
+  
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const answer = button.nextElementSibling;
+      const icon = button.querySelector('.faq-icon');
+      
+      const isOpen = answer.classList.contains('grid-rows-[1fr]');
+      
+      // Close all other accordions (optional, but good UX)
+      document.querySelectorAll('.faq-answer').forEach(el => {
+        el.classList.remove('grid-rows-[1fr]');
+        el.classList.add('grid-rows-[0fr]');
+      });
+      document.querySelectorAll('.faq-icon').forEach(el => {
+        el.classList.remove('-rotate-180');
+      });
+
+      if (!isOpen) {
+        answer.classList.remove('grid-rows-[0fr]');
+        answer.classList.add('grid-rows-[1fr]');
+        icon.classList.add('-rotate-180');
+      }
+    });
+  });
+</script>

@@ -1,0 +1,22 @@
+---
+import { getSiteData } from '../data/getSiteData';
+const siteData = await getSiteData();
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import WhyUs from '../components/WhyUs.astro';
+import Services from '../components/Services.astro';
+import Gallery from '../components/Gallery.astro';
+import Testimonials from '../components/Testimonials.astro';
+import LocationMap from '../components/LocationMap.astro';
+import Faq from '../components/Faq.astro';
+---
+
+<Layout>
+  <Hero />
+  <WhyUs />
+  <Services />
+  <Gallery />
+  <Testimonials />
+  {siteData.contact.showMap && <LocationMap />}
+  <Faq />
+</Layout>

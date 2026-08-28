@@ -1,0 +1,161 @@
+{
+  "demoMode": true,
+  "name": "Raph Spots",
+  "description": "Servicio de catering, barras de snacks, coctelería y coffee break para eventos en Mérida. Montajes minimalistas y armónicos. ¡Cotiza sin compromiso!",
+  "headline": "Barras y Carritos de Catering Exclusivos para Eventos",
+  "subheadline": "Eleva tu evento corporativo o social con nuestras barras de snacks, coctelería y coffee break. Diseñados a la medida para armonizar con tu estilo.",
+  "promoBadge": "¡Cotización sin compromiso y atención personalizada!",
+  
+  "branding": {
+    "themePreset": "modern"
+  },
+  
+  "theme": {
+    "primary": "#98C9A3",
+    "secondary": "#333333",
+    "cta": "#333333",
+    "neutral": "#F8F9FA"
+  },
+
+  "hero": {
+    "ctaText": "Cotizar por WhatsApp",
+    "whatsappDefaultMessage": "Hola, visité su página web y me gustaría recibir una cotización y ver fotos de sus servicios."
+  },
+
+  "sectionTitles": {
+    "whyUs": "Por qué elegirnos",
+    "services": "Nuestros Servicios",
+    "gallery": "Nuestra Galería",
+    "testimonials": "Lo que dicen nuestros clientes",
+    "location": "Visítanos",
+    "faq": "Preguntas Frecuentes"
+  },
+
+  "services": [
+    {
+      "title": "Barras de Snacks Premium",
+      "description": "Estaciones interactivas con tostitos, esquites y toppings de la más alta calidad para sorprender a tus invitados.",
+      "icon": "Popcorn",
+      "whatsappMessage": "Hola, me interesa información, fotos y precios sobre la Barra de Snacks.",
+      "image": "/images/servicio-1.jpeg"
+    },
+    {
+      "title": "Coctelería y Bebidas",
+      "description": "Mixología, mimosas y bebidas refrescantes con una presentación impecable que se robará las miradas.",
+      "icon": "Martini",
+      "whatsappMessage": "Hola, me interesa información y fotos sobre el servicio de Coctelería.",
+      "image": "/images/servicio-2.jpeg"
+    },
+    {
+      "title": "Coffee Break Corporativo",
+      "description": "Bocadillos, mini croissants y café para reuniones de primer nivel que proyecten la mejor imagen de tu empresa.",
+      "icon": "Coffee",
+      "whatsappMessage": "Hola, me interesa información, fotos y precios sobre el servicio de Coffee Break.",
+      "image": "/images/servicio-3.jpeg"
+    },
+    {
+      "title": "Estaciones Dulces y Mini Pancakes",
+      "description": "Postres y mini pancakes preparados al momento, decorados bajo el concepto minimalista de tu evento.",
+      "icon": "CakeSlice",
+      "whatsappMessage": "Hola, me interesa información y fotos sobre las Estaciones Dulces y Mini Pancakes.",
+      "image": "/images/servicio-4.jpeg"
+    }
+  ],
+  "whyUs": [
+    {
+      "title": "Ingredientes de Alta Calidad",
+      "description": "Cuidamos el sabor tanto como la presentación. Utilizamos insumos frescos y premium para garantizar una experiencia deliciosa."
+    },
+    {
+      "title": "Diseño Limpio y Armónico",
+      "description": "Nos adaptamos a la paleta de colores y decoración de tu evento, logrando que nuestros carritos y spots luzcan espectaculares."
+    },
+    {
+      "title": "Certeza y Seguridad Total",
+      "description": "Respaldamos tu tranquilidad con contratos firmados por ambas partes y opciones de facturación para tu evento."
+    }
+  ],
+  "trustBadges": [
+    "Aceptamos Tarjetas de Crédito",
+    "Facturación Disponible",
+    "Contratos por Escrito"
+  ],
+  "faqs": [
+    {
+      "question": "¿En qué zonas de Yucatán prestan el servicio?",
+      "answer": "Llevamos nuestros carritos y barras a eventos sociales y corporativos en toda la ciudad de Mérida y sus alrededores."
+    },
+    {
+      "question": "¿Cómo puedo ver fotos de sus montajes y conocer los precios?",
+      "answer": "¡Muy fácil! Contáctanos por WhatsApp y te enviaremos nuestro catálogo digital con fotografías reales de nuestros servicios y te haremos una cotización a la medida sin compromiso."
+    },
+    {
+      "question": "¿Qué métodos de pago aceptan?",
+      "answer": "Buscamos tu comodidad. Aceptamos efectivo, tarjetas de crédito, ligas de pago y transferencias. Además, ofrecemos facturación electrónica."
+    }
+  ],
+  "contact": {
+    "phone": "+52 999 000 0000",
+    "whatsapp": "529990000000",
+    "email": "",
+    "address": "Mérida, Yucatán y zonas aledañas",
+    "mapsUrl": "",
+    "lat": 20.9673,
+    "lng": -89.6237,
+    "showMap": false
+  },
+  "schedule": {
+    "showIndicator": true,
+    "summary": [
+      "Lunes a Viernes: 09:00 - 18:00",
+      "Sábados: 10:00 - 14:00",
+      "Domingos: Cerrado"
+    ],
+    "hours": {
+      "1": { "open": "09:00", "close": "18:00" },
+      "2": { "open": "09:00", "close": "18:00" },
+      "3": { "open": "09:00", "close": "18:00" },
+      "4": { "open": "09:00", "close": "18:00" },
+      "5": { "open": "09:00", "close": "18:00" },
+      "6": { "open": "10:00", "close": "14:00" },
+      "0": null
+    }
+  },
+  "social": {
+    "facebook": "https://facebook.com/raphspots",
+    "instagram": "https://instagram.com/raphspots",
+    "tiktok": "https://tiktok.com/@raphspots",
+    "twitter": "https://twitter.com/twitter"
+  },
+  "images": {
+    "logo": "/images/logo.jpeg",
+    "hero": "/images/hero.jpeg",
+    "about": "/images/hero.jpeg"
+  },
+  "gallery": [
+    { "src": "/images/trabajo-1.jpeg", "alt": "Trabajo 1" },
+    { "src": "/images/trabajo-2.jpeg", "alt": "Trabajo 2" },
+    { "src": "/images/trabajo-3.jpeg", "alt": "Trabajo 3" },
+    { "src": "/images/trabajo-4.jpeg", "alt": "Trabajo 4" }
+  ],
+  "testimonials": [
+    {
+      "name": "Ana G.",
+      "role": "Organizadora de Eventos",
+      "text": "El montaje de la barra de snacks fue espectacular. Todo súper limpio, armónico con la decoración y delicioso. ¡Mis clientes quedaron fascinados!",
+      "rating": 5
+    },
+    {
+      "name": "Carlos M.",
+      "role": "Director Comercial",
+      "text": "Contratamos el Coffee Break corporativo y la puntualidad fue de 10. La coctelería sin alcohol le dio un toque muy premium a nuestra reunión.",
+      "rating": 5
+    },
+    {
+      "name": "Sofía R.",
+      "role": "Fiesta de Cumpleaños",
+      "text": "¡Las mini pancakes volaron! Excelente atención desde que mandé el primer WhatsApp hasta el día del evento. Súper recomendados.",
+      "rating": 5
+    }
+  ]
+}

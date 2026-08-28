@@ -1,0 +1,83 @@
+---
+import { getSiteData } from '../data/getSiteData';
+const siteData = await getSiteData();
+import Layout from '../layouts/Layout.astro';
+
+---
+
+<Layout title={`Visual Boutique - ${siteData.name}`}>
+  <!-- Hero Full Screen -->
+  <section class="relative h-[calc(100vh-74px)] flex items-center justify-center text-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src={siteData.images.hero} alt={siteData.name} class="w-full h-full object-cover opacity-80" />
+      <div class="absolute inset-0 bg-gray-900/40"></div>
+    </div>
+    <div class="relative z-10 container mx-auto px-4 max-w-4xl text-white mt-16 md:mt-0">
+      <span class="inline-block py-1 px-3 rounded-full bg-brand-primary/20 backdrop-blur-sm border border-brand-primary/50 text-white text-xs md:text-sm font-semibold mb-4 md:mb-6 tracking-widest uppercase">
+        {siteData.promoBadge}
+      </span>
+      <h1 class="text-3xl md:text-5xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight text-white">{siteData.headline}</h1>
+      <p class="text-lg md:text-xl lg:text-2xl text-gray-100 mb-8 md:mb-10 font-light max-w-2xl mx-auto">{siteData.subheadline}</p>
+
+    </div>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-white">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+    </div>
+  </section>
+
+  <!-- About / Story -->
+  <section class="py-12 md:py-24 bg-brand-neutral">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+        <div class="w-full md:w-1/2">
+          <img src={siteData.images.about || siteData.images.hero} alt="Nuestra Historia" class="w-full h-[350px] md:h-[600px] object-cover shadow-xl rounded-2xl" />
+        </div>
+        <div class="w-full md:w-1/2">
+          <h2 class="text-4xl font-bold text-brand-secondary mb-6">{siteData.name}</h2>
+          <p class="text-xl text-gray-600 leading-relaxed mb-8">{siteData.description}</p>
+          <div class="space-y-6">
+            {(siteData.whyUs || []).map((item) => (
+              <div class="border-l-2 border-brand-primary pl-6">
+                <h3 class="text-xl font-bold text-brand-secondary mb-2">{item.title}</h3>
+                <p class="text-gray-600">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Minimal Services List -->
+  <section class="py-12 md:py-24 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-brand-secondary mb-10 md:mb-16">Nuestros Servicios</h2>
+      <div class="space-y-6 md:space-y-8 text-left">
+        {siteData.services.map((service) => (
+          <div class="group border-b border-gray-100 pb-8 hover:border-brand-primary transition-colors flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div>
+              <h3 class="text-2xl font-bold text-gray-900 group-hover:text-brand-primary transition-colors mb-2">{service.title}</h3>
+              <p class="text-gray-500 max-w-xl">{service.description}</p>
+            </div>
+            <a href={`https://wa.me/${siteData.contact.whatsapp}?text=${encodeURIComponent((service.whatsappMessage || ''))}`} target="_blank" class="text-brand-cta font-semibold flex items-center gap-2 whitespace-nowrap">
+              Saber más <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Masonry Gallery -->
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
+        {siteData.gallery.map((img) => (
+          <div class="break-inside-avoid">
+            <img src={img.src} alt={img.alt} class="w-full object-cover rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
