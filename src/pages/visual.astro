@@ -7,7 +7,7 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title={`Visual Boutique - ${siteData.name}`}>
   <!-- Hero Full Screen -->
-  <section class="relative h-[calc(100vh-74px)] flex items-center justify-center text-center overflow-hidden">
+  <section class="relative h-[calc(100vh-74px)] flex items-start pt-32 md:pt-0 md:items-center justify-center text-center overflow-hidden">
     <div class="absolute inset-0 z-0">
       <img src={siteData.images.hero} alt={siteData.name} class="w-full h-full object-cover opacity-80" />
       <div class="absolute inset-0 bg-gray-900/40"></div>
